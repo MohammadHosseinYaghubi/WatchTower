@@ -44,11 +44,3 @@ class CheckServiceView(APIView):
             **result
         )
         return Response(result)
-
-        # return Response({
-        #     "service": service.name,
-        #     "is_up": service_status.is_up,
-        #     "status_code": service_status.status_code,
-        #     "response_time": service_status.response_time,
-        #     "checked_at": service_status.checked_at
-        # })
