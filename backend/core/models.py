@@ -12,6 +12,7 @@ class Service(models.Model):
     url = models.URLField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    last_status = models.BooleanField(null=True, blank= True)
 
     def __str__(self):
         return f"{self.name} - {self.url}"
