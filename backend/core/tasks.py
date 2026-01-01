@@ -13,3 +13,20 @@ def check_all_services():
             service=service,
             **result
         )
+        
+        #Alert logic
+        if service.last_status is None:
+            service.last_status = result["is_up"]
+            service.save()
+            continue
+        
+        if service.last_status and not result["is_up"]:
+            send_mail(
+                subject=f"Service DOWN: {service.name}",
+                message=f"{service.url} is not reachable.",
+                from_email = "watchtower@system.com",
+                recipient_list=[service.user.email],
+            )
+        service.last_status = result["is_up"]
+        service.save()
+            
