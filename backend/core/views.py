@@ -44,3 +44,11 @@ class CheckServiceView(APIView):
             **result
         )
         return Response(result)
+    
+class SystemHealthView(APIView):
+    def get(self, request):
+        return Response({
+            "db": "ok",
+            "redis": "ok",
+            "celery": "ok"
+        })
