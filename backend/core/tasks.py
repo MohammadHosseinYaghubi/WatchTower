@@ -2,6 +2,7 @@ from celery import shared_task
 from .models import Service, ServiceStatus
 from .utils import check_service
 from django.core.mail import send_mail
+import logging
 
 @shared_task
 def check_all_services():
@@ -29,4 +30,7 @@ def check_all_services():
             )
         service.last_status = result["is_up"]
         service.save()
-            
+
+        logger = logging.getLogger(__name__)
+
+        logger.info(f"Checked {Service.url} - UP: {result['is_up']}")
