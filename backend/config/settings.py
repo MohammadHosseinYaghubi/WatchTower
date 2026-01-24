@@ -157,6 +157,15 @@ SIMPLE_JWT = {
     # 'USER_ID_CLAIM': 'user_id',
 }
 
+REST_FRAMWORK = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framwork.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "1000/day"
+    }
+}
+
 AUTH_USER_MODEL = 'accounts.User'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
@@ -171,3 +180,19 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers":
+        False,
+        "handlers": {
+            "console": {
+                "class":
+                    "logging.StreamHandler",
+            },
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": "INFO",
+        },
+}
